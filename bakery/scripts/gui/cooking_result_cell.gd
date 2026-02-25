@@ -1,6 +1,5 @@
 extends Control
 
-
 @onready var TEXTURE_BUTTON = $Panel/TextureButton
 @onready var item_scene_path: String = path_holder.EMPTY
 signal button_pressed(item_scene_path)
