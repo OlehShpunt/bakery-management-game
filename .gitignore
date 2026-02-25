@@ -15,3 +15,5 @@ bakery/assets/**
 
 # Addons and plugins
 bakery/addons/**
+
+.DS_store
