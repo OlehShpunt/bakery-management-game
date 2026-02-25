@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://lugtk53r4ygg"]
+[gd_scene load_steps=15 format=3 uid="uid://lugtk53r4ygg"]
 
 [ext_resource type="Script" uid="uid://wt3chcpe40xg" path="res://scripts/npc/npc_base.gd" id="1_1xw1e"]
 [ext_resource type="Script" uid="uid://bshao3y8rpdn3" path="res://scripts/npc/thought_component.gd" id="2_08i8u"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_v6ydx"]
 specular_color = Color(0.292354, 0.442882, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bianu"]
+radius = 38.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_16v5l"]
 radius = 0.833333
@@ -44,11 +47,19 @@ visible = false
 scale = Vector2(274, 274)
 texture = SubResource("CanvasTexture_v6ydx")
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
+[node name="NPC Detector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC Detector"]
+shape = SubResource("CircleShape2D_bianu")
+debug_color = Color(0.242017, 0.7, 0, 0.42)
+
+[node name="NPCBodyCollisionArea2D" type="Area2D" parent="."]
+collision_layer = 66
 collision_mask = 10
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCBodyCollisionArea2D"]
 scale = Vector2(12, 12)
 shape = SubResource("CircleShape2D_16v5l")
 
@@ -98,6 +109,8 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_lnc5x")
 [node name="NpcAnimationComponent" parent="." instance=ExtResource("3_bianu")]
 position = Vector2(0, -16)
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_teleport_area_entered"]
+[connection signal="area_entered" from="NPC Detector" to="." method="_on_npc_detector_area_entered"]
+[connection signal="body_entered" from="NPC Detector" to="." method="_on_npc_detector_body_entered"]
+[connection signal="area_entered" from="NPCBodyCollisionArea2D" to="." method="_on_teleport_area_entered"]
 [connection signal="area_entered" from="ItemHolderDetector" to="." method="_on_item_holder_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

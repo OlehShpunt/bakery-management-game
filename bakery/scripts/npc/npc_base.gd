@@ -1,6 +1,7 @@
 class_name npc_base
 extends Node2D
 
+@onready var npc_body_collision_area = $NPCBodyCollisionArea2D
 
 @export var movement_speed: float = 20.0
 
@@ -231,3 +232,25 @@ func _on_button_pressed() -> void:
 ## Identification method
 func npc():
 	pass
+
+
+func _on_npc_detector_body_entered(body: Node2D) -> void:
+	return
+	if body.has_method("player"):
+		return
+		
+	print("--& detected ", body)
+	
+	# For now just make NPC simply stop navigating
+	navigation_agent.target_position = global_position
+
+
+func _on_npc_detector_area_entered(area: Area2D) -> void:
+	print("--& area detected: ", area)
+	
+	if (area == npc_body_collision_area):
+		print("--& returning this area:  ", area)
+		return
+	
+	# For now just make NPC simply stop navigating
+	navigation_agent.target_position = global_position

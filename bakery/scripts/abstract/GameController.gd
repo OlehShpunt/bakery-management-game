@@ -65,8 +65,7 @@ static func triggerSellingPhase(duration: int, round_num: int):
 	GameLoopUi.assign_new_timer(duration)
 	
 	# Spawn NPCs
-	npc_driver.add_npc_base(PurchaseListManager.get_list(round_num))  # TEST  # TODO rework number of NPCs and change method
-
+	npc_driver.add_npc_base(round_num, 3)  # TEST  # TODO rework number of NPCs and change method
 
 static func startNewRound(round_num: int):
 	pass

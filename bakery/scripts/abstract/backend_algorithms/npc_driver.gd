@@ -36,18 +36,32 @@ func _ready() -> void:
 	print("&& NPC Driver started! ")
 
 
-func add_npc_base(purchase_list):
-	var target_pos = global_ref_register.get_teleport_global_pos(str(101))
+func add_npc_base(round_num, quantity):
 	
-	var npc = npc_base_inst.instantiate()
-	npc.buffered_target_position = target_pos
-	npc.global_position = Vector2(1750, 1650)  # bottom
-	#npc.global_position = Vector2(1726, 900)  # road cross
-	
-	var planned_purchase_list = purchase_list
-	npc.set_planned_purchase_list(planned_purchase_list)
-	
-	add_child(npc)
+	for i in range(quantity):
+		
+		var purchase_list_for_this_round: Array = PurchaseListManager.get_list(round_num)
+		
+		var purchase_list_for_a_prev_round = []
+		if round_num != 1:
+			var rand_round_num = randi_range(1, round_num - 1)
+			purchase_list_for_a_prev_round = PurchaseListManager.get_list(rand_round_num)
+		else:
+			purchase_list_for_a_prev_round = []
+		
+		var target_pos = global_ref_register.get_teleport_global_pos(str(101))
+		
+		var npc = npc_base_inst.instantiate()
+		npc.buffered_target_position = target_pos
+		npc.global_position = Vector2(1750, 1650)  # bottom
+		#npc.global_position = Vector2(1726, 900)  # road cross
+		
+		var planned_purchase_list = purchase_list_for_this_round + purchase_list_for_a_prev_round
+		npc.set_planned_purchase_list(planned_purchase_list)
+		
+		add_child(npc)
+		
+		await get_tree().create_timer(2).timeout
 
 
 func add_npc_customer():
