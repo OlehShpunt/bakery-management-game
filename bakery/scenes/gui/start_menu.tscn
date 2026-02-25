@@ -18,43 +18,63 @@ offset_bottom = 1100.0
 
 [node name="JoinName" type="TextEdit" parent="Panel"]
 layout_mode = 0
-offset_left = 584.0
+offset_left = 544.0
 offset_top = 400.0
-offset_right = 729.0
+offset_right = 689.0
 offset_bottom = 421.0
+scale = Vector2(2.40529, 2.40529)
 
 [node name="HostName" type="TextEdit" parent="Panel"]
 layout_mode = 0
-offset_left = 887.0
+offset_left = 991.0
 offset_top = 400.0
-offset_right = 1032.0
+offset_right = 1136.0
 offset_bottom = 421.0
+scale = Vector2(2.40529, 2.40529)
 
 [node name="JoinButton" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 588.0
-offset_top = 440.0
-offset_right = 731.0
-offset_bottom = 470.0
+offset_left = 548.0
+offset_top = 480.0
+offset_right = 691.0
+offset_bottom = 511.0
+scale = Vector2(2.40529, 2.40529)
 text = "Join"
 
 [node name="HostButton" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 890.0
-offset_top = 443.0
-offset_right = 1033.0
-offset_bottom = 474.0
+offset_left = 994.0
+offset_top = 483.0
+offset_right = 1137.0
+offset_bottom = 514.0
+scale = Vector2(2.40529, 2.40529)
 text = "Host
 "
 
 [node name="LoadGameButton" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 746.0
-offset_top = 566.0
-offset_right = 889.0
-offset_bottom = 597.0
+offset_left = 786.0
+offset_top = 702.0
+offset_right = 929.0
+offset_bottom = 733.0
+scale = Vector2(2.40529, 2.40529)
 text = "Load Game"
 
+[node name="debug" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 240.0
+offset_right = 1778.0
+offset_bottom = 271.0
+theme_override_font_sizes/font_size = 25
+text = "loading..."
+horizontal_alignment = 1
+
+[connection signal="gui_input" from="Panel/JoinName" to="." method="_on_join_name_gui_input"]
+[connection signal="gui_input" from="Panel/HostName" to="." method="_on_host_name_gui_input"]
+[connection signal="gui_input" from="Panel/JoinButton" to="." method="_on_join_button_gui_input"]
 [connection signal="pressed" from="Panel/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="gui_input" from="Panel/HostButton" to="." method="_on_host_button_gui_input"]
 [connection signal="pressed" from="Panel/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="gui_input" from="Panel/LoadGameButton" to="." method="_on_load_game_button_gui_input"]
 [connection signal="pressed" from="Panel/LoadGameButton" to="." method="_on_load_game_button_pressed"]
